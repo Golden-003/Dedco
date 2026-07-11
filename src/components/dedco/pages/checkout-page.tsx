@@ -218,22 +218,6 @@ export function CheckoutPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="kofi" className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
-                        Prénom
-                      </label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2" size={16} style={{ color: "var(--text-3)" }} />
-                        <input
-                          type="text"
-                          value={firstName}
-                          onChange={(e) => setFirstName(e.target.value)}
-                          placeholder="Kofi"
-                          className="w-full pl-9 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
-                          style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
-                        />
-                      </div>
-                    </div>
-                    <div>
                       <label htmlFor="akindele" className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
                         Nom
                       </label>
@@ -244,6 +228,22 @@ export function CheckoutPage() {
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           placeholder="Akindélé"
+                          className="w-full pl-9 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
+                          style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="kofi" className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
+                        Prénom
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2" size={16} style={{ color: "var(--text-3)" }} />
+                        <input
+                          type="text"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          placeholder="Kofi"
                           className="w-full pl-9 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
                           style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
                         />
@@ -442,7 +442,7 @@ export function CheckoutPage() {
                       </span>
                     </div>
                     <p className="text-sm" style={{ color: "var(--text-1)" }}>
-                      {firstName} {lastName}
+                      {lastName} {firstName}
                     </p>
                     <p className="text-sm" style={{ color: "var(--text-2)" }}>
                       {quartier}, {ville}

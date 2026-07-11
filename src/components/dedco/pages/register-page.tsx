@@ -39,7 +39,7 @@ export function RegisterPage() {
       // Le client n'a PAS de KYC, pas de validation admin
       login({
         role: "client",
-        name: `${firstName} ${name}` || email.split("@")[0] || "Nouvel utilisateur",
+        name: `${name} ${firstName}` || email.split("@")[0] || "Nouvel utilisateur",
         email: email || "user@dedco.bj",
         avatar: "https://images.unsplash.com/photo-1614317226704-aba58b1ce153?auto=format&fit=crop&crop=faces&w=120&q=80",
       });
@@ -80,23 +80,6 @@ export function RegisterPage() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
-                Prénom
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2" size={18} style={{ color: "var(--text-3)" }} />
-                <input
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Sophie"
-                  className="w-full pl-10 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
-                  style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
                 Nom
               </label>
               <div className="relative">
@@ -106,6 +89,23 @@ export function RegisterPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Kossou"
+                  className="w-full pl-10 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
+                  style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
+                Prénom
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2" size={18} style={{ color: "var(--text-3)" }} />
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Sophie"
                   className="w-full pl-10 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
                   style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
                 />

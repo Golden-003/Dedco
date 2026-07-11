@@ -240,9 +240,15 @@ function ProfileContent({
               <>
                 <div>
                   <p className="text-xs text-ink-mute uppercase tracking-wide mb-0.5">
-                    Nom complet
+                    Nom
                   </p>
-                  <p className="font-semibold">{PROFILE.name}</p>
+                  <p className="font-semibold">{PROFILE.name.split(" ").slice(-1)[0]}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-ink-mute uppercase tracking-wide mb-0.5">
+                    Prénom
+                  </p>
+                  <p className="font-semibold">{PROFILE.name.split(" ").slice(0, -1).join(" ")}</p>
                 </div>
                 <div>
                   <p className="text-xs text-ink-mute uppercase tracking-wide mb-0.5">
@@ -324,11 +330,21 @@ function EditProfileForm({ onSave }: { onSave: () => void }) {
     <div className="space-y-3">
       <div>
         <label className="text-xs text-ink-mute uppercase tracking-wide mb-1 block">
-          Nom complet
+          Nom
         </label>
         <input
           type="text"
-          defaultValue={PROFILE.name}
+          defaultValue={PROFILE.name.split(" ").slice(-1)[0]}
+          className="w-full px-3 py-2 rounded-md border border-border bg-card text-sm focus:outline-none focus:border-amber"
+        />
+      </div>
+      <div>
+        <label className="text-xs text-ink-mute uppercase tracking-wide mb-1 block">
+          Prénom
+        </label>
+        <input
+          type="text"
+          defaultValue={PROFILE.name.split(" ").slice(0, -1).join(" ")}
           className="w-full px-3 py-2 rounded-md border border-border bg-card text-sm focus:outline-none focus:border-amber"
         />
       </div>

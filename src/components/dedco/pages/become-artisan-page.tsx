@@ -90,7 +90,8 @@ export function BecomeArtisanPage() {
   const [partnerType, setPartnerType] = useState<PartnerType | null>(null);
 
   // Form fields
-  const [fullName, setFullName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
@@ -99,7 +100,7 @@ export function BecomeArtisanPage() {
   const [bio, setBio] = useState("");
 
   const info = partnerType ? PARTNER_INFO[partnerType] : null;
-  const canSubmit = () => fullName && email && phone && city && specialty && experience;
+  const canSubmit = () => lastName && firstName && email && phone && city && specialty && experience;
 
   function handleChoose(type: PartnerType) {
     setPartnerType(type);
@@ -133,7 +134,7 @@ export function BecomeArtisanPage() {
         </div>
         <h1 className="display-xl mb-3">Candidature envoyée !</h1>
         <p className="text-sm text-[var(--text-2)] mb-2">
-          Merci {fullName.split(" ")[0]} ! Votre demande pour devenir {info?.label.toLowerCase()} a bien été reçue.
+          Merci {firstName} ! Votre demande pour devenir {info?.label.toLowerCase()} a bien été reçue.
         </p>
         <p className="text-xs text-[var(--text-3)] mb-6">
           Notre équipe va examiner votre profil et vos documents sous 48-72h. Vous recevrez un email de confirmation à {email} dès validation.
@@ -357,18 +358,36 @@ export function BecomeArtisanPage() {
           </div>
 
           <div className="space-y-4">
-            {/* Nom complet */}
+            {/* Nom */}
             <div>
               <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
-                Nom complet <span className="text-terracotta">*</span>
+                Nom <span className="text-terracotta">*</span>
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2" size={18} style={{ color: "var(--text-3)" }} />
                 <input
                   type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Kofi Akindélé"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Akindélé"
+                  className="w-full pl-10 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
+                  style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
+                />
+              </div>
+            </div>
+
+            {/* Prénom */}
+            <div>
+              <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--text-1)" }}>
+                Prénom <span className="text-terracotta">*</span>
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2" size={18} style={{ color: "var(--text-3)" }} />
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Kofi"
                   className="w-full pl-10 pr-4 py-3 text-sm rounded-md border focus:outline-none focus:ring-2 transition-all"
                   style={{ background: "var(--bg-cream)", borderColor: "var(--border)", color: "var(--text-1)" }}
                 />
