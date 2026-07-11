@@ -186,20 +186,6 @@ export function RegisterPage() {
               "Créer mon compte"
             )}
           </button>
-
-          {/* Info prestataire */}
-          <div className="mt-5 p-3 rounded-lg" style={{ background: "var(--bg-warm)" }}>
-            <p className="text-xs text-center" style={{ color: "var(--text-3)" }}>
-              Vous êtes artisan ou designer ?{" "}
-              <button
-                onClick={() => navigate({ page: "become-artisan" })}
-                className="font-semibold hover:underline"
-                style={{ color: "var(--amber)" }}
-              >
-                Devenir partenaire →
-              </button>
-            </p>
-          </div>
         </div>
 
         {/* Login link */}

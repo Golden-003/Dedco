@@ -719,22 +719,7 @@ export function Footer({
             <ul className="space-y-2 text-sm">
               <li>
                 <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
-                  Devenir artisan
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
-                  Devenir designer
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
-                  Espace maison de déco
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => navigate({ page: "plans-tarifs" })} className="hover:text-amber transition-colors">
-                  Abonnements
+                  Devenir partenaire
                 </button>
               </li>
               <li>
