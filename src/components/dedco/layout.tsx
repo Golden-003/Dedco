@@ -715,7 +715,7 @@ export function Footer({
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-3 text-sm">Artisans</h4>
+            <h4 className="text-white font-semibold mb-3 text-sm">Partenaires</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
@@ -724,11 +724,16 @@ export function Footer({
               </li>
               <li>
                 <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
-                  Niveaux de confiance
+                  Devenir designer
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => onNavigate({ name: "marketplace" })} className="hover:text-amber transition-colors">
+                <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
+                  Espace maison de déco
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => navigate({ page: "plans-tarifs" })} className="hover:text-amber transition-colors">
                   Abonnements
                 </button>
               </li>
