@@ -68,6 +68,93 @@ BORDER       #EDE8DF    Bordures hairline
 | Avatars | 999px (cercle) |
 | Images produits | 0 (carré) ou 12px |
 
+### 1.8 Icônes — Mapping définitif (source de vérité unique)
+
+Toutes les icônes proviennent de **Lucide** (`lucide-react` sur web, `lucide-react-native` sur app). Ci-dessous le mapping officiel — aucune déviation autorisée.
+
+#### Catégories de produits
+| Catégorie | Icône Lucide | Slug |
+|-----------|-------------|------|
+| Tables | `Table2` | tables |
+| Fauteuils & Chaises | `Armchair` | fauteuils |
+| Luminaires | `Lamp` | luminaires |
+| Textiles | `Layers` | textiles |
+| Déco | `Frame` | decoration |
+| Rangements | `Archive` | rangements |
+| Canapés | `Sofa` | canapes |
+| Lits | `BedDouble` | lits |
+
+#### Navigation
+| Usage | Icône Lucide |
+|-------|-------------|
+| Accueil (tab) | `Home` |
+| Inspirations (tab) | `LayoutGrid` |
+| Marché (tab) | `Store` |
+| Projets (tab) | `FolderOpen` |
+| Compte (tab) | `User` |
+| Retour | `ArrowLeft` (chevron `ChevronLeft` sur mobile) |
+| Suivant / Chevron | `ChevronRight` |
+| Recherche | `Search` |
+| Panier | `ShoppingBag` |
+| Notifications | `Bell` |
+| Menu | `Menu` |
+
+#### Actions
+| Usage | Icône Lucide |
+|-------|-------------|
+| Favori (cœur) | `Heart` |
+| Bookmark (scène) | `Bookmark` |
+| Partager | `Share2` |
+| Ajouter (+) | `Plus` |
+| Retirer (−) | `Minus` |
+| Fermer (X) | `X` |
+| Étoile (rating) | `Star` |
+| Modifier (crayon) | `Pencil` (mobile) / `PenSquare` (web) |
+| Supprimer | `Trash2` |
+| Filtres | `SlidersHorizontal` |
+| Trier | `ArrowUpDown` |
+
+#### Trust & statut
+| Usage | Icône Lucide |
+|-------|-------------|
+| Garantie Dedco | `ShieldCheck` |
+| Artisan/Designer vérifié | `BadgeCheck` |
+| Livraison | `Truck` |
+| Localisation | `MapPin` |
+| Paiement sécurisé | `Lock` |
+| Succès | `CheckCircle2` |
+| Alert/Erreur | `AlertTriangle` |
+| Information | `HelpCircle` |
+| Horloge (délai) | `Clock` |
+
+#### Compte & paramètres
+| Usage | Icône Lucide |
+|-------|-------------|
+| Profil | `User` |
+| Commandes | `Package` |
+| Avis | `Star` |
+| Adresses | `MapPin` |
+| Moyens de paiement | `CreditCard` |
+| Langue & devise | `Globe` |
+| Aide & support | `HelpCircle` |
+| Paramètres | `Settings` |
+| Déconnexion | `LogOut` |
+
+#### Briefs & projets
+| Usage | Icône Lucide |
+|-------|-------------|
+| Brief artisan | `Hammer` |
+| Brief designer | `PencilRuler` (web) / `Pencil` (mobile) |
+| Projet | `FolderOpen` |
+| Message | `MessageSquare` |
+
+**Règles** :
+- Stroke-width : **1.5px** (général), **2px** (CTA, navigation)
+- Tailles : 14, 16, 18, 20, 24, 32px
+- Couleur : `currentColor` (hérite du parent)
+- **PAS de** : `Lightbulb` (utiliser `Lamp`), `Shirt` (utiliser `Layers`), `Flower2` (retiré)
+- **PAS de** : pastilles circulaires colorées avec icône blanche dedans
+
 ---
 
 ## 2. Composants UI
