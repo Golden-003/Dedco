@@ -719,7 +719,7 @@ export function Footer({
             <ul className="space-y-2 text-sm">
               <li>
                 <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
-                  Devenir artisan
+                  Devenir prestataire
                 </button>
               </li>
               <li>
