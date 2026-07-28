@@ -2,7 +2,7 @@
 
 import { memo, useMemo } from "react";
 import Image from "next/image";
-import { Star, BadgeCheck, MapPin, Table2, Armchair, Lightbulb, Shirt, Flower2, BookOpen, Sofa, BedDouble, Archive, Lamp, Frame } from "lucide-react";
+import { Star, BadgeCheck, MapPin, Table2, Armchair, Lightbulb, Layers, Flower2, BookOpen, Sofa, BedDouble, Archive, Lamp, Frame } from "lucide-react";
 import { formatFCFA, getArtisan } from "@/lib/dedco-data";
 import { useReviewStore, useArtisanRating, useProductRating } from "@/lib/review-store";
 import type { Product } from "@/lib/dedco-types";
@@ -505,7 +505,7 @@ export const CategoryCard = memo(function CategoryCard({
   onOpen: (slug: string) => void;
 }) {
   const ICON_MAP: Record<string, typeof Table2> = {
-    Table2, Armchair, Lightbulb, Shirt, Flower2, BookOpen, Sofa, BedDouble,
+    Table2, Armchair, Lightbulb, Layers, Flower2, BookOpen, Sofa, BedDouble,
     Archive, Lamp, Frame, Vase: Flower2,
   };
   const CatIcon = ICON_MAP[category.icon] || Table2;

@@ -1,113 +1,78 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependencies
 node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# Next.js
 /.next/
 /out/
-
-# production
 /build
 
-# misc
+# Misc
 .DS_Store
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-local-*
-.claude
-.z-ai-config
 *.log
-dev.log
-dev.out.log
-test
-prompt
 
-server.log
-# Skills directory
-/skills/
-# ============================================================
-# DEDCO — Sécurité sandbox
-# ============================================================
-
-# Secrets et tokens (JAMAIS pousser)
-/upload/.pat
-upload/.pat
-**/.pat
+# Env
 .env
 .env.local
 .env.*.local
 
-# Backups sandbox (trop lourds, pas utiles sur GitHub)
+# Vercel
+.vercel
+.vercel-trigger
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Sandbox artifacts (NEVER push)
 /upload/
 /download/
 /tool-results/
-/src_backup_*/
-/public_backup_*/
+/skills/
+/scripts/
 /.zscripts/
 /mini-services/
 /examples/
 
-# Logs et artefacts sandbox
+# Backups
+src_backup_*/
+public_backup_*/
+
+# App native (separate repo)
+/dedco-app-native/
+/Dedco-app/
+/app-prototype/
+
+# Docs de travail
+AUDIT-PLAN-ACTION.md
+Caddyfile
 chat_content.json
 worklog.md
-*.log
 dev.log
-dev.out.log
-test
-prompt
-server.log
+bun.lock
 
-# Skills directory
-/skills/
-app-prototype/
+# Large files
+*.zip
+*.pdf
 
-# ============================================================
-# DEDCO — Fichiers de design / docs / prototypes (pas dans le repo)
-# ============================================================
-# Ces fichiers sont des livrables de design, pas du code source.
-# Ils alourdissent le repo inutilement. Les garder en local seulement.
-public/*.zip
-public/*.pdf
-public/dedcco-*.html
-public/dedco-*.html
-public/app-*.html
-public/app-screens/
-public/brand-book/
+# Design prototypes (not source code)
+public/dedcco-*
+public/app-v*
+public/app-sim*
+public/app-screens*
+public/brand-book*
 public/dedco-storyboard/
+public/dedco-motion-design.html
+public/parcours-utilisateurs.md
 public/public/
-public/DEDCCO-*.md
 
-# Scripts de dev / génération de PDFs (pas du code source)
-/scripts/
-
-# Docs de travail à la racine
-AUDIT-PLAN-ACTION.md
-.vercel-trigger
-Caddyfile
+# Config app native (pas dans ce repo)
+app.json
+metro.config.js
+babel.config.js
+supabase/schema_complete.sql
+constants/theme.ts
+assets/fonts/
+lib/supabase.ts
+lib/types.ts
+lib/api.ts

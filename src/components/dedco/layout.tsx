@@ -715,11 +715,21 @@ export function Footer({
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-3 text-sm">Partenaires</h4>
+            <h4 className="text-white font-semibold mb-3 text-sm">Artisans</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
-                  Devenir partenaire
+                  Devenir artisan
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => navigate({ page: "become-artisan" })} className="hover:text-amber transition-colors">
+                  Niveaux de confiance
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => onNavigate({ name: "marketplace" })} className="hover:text-amber transition-colors">
+                  Abonnements
                 </button>
               </li>
               <li>
