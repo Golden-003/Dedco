@@ -999,14 +999,15 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 .tab-item.active { color: var(--ink); }
-.tab-icon {
+.tab-icon-outline,
+.tab-icon-filled {
   width: 24px; height: 24px;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.25s ease;
 }
-.tab-item.active .tab-icon { stroke-width: 2.5; }
+.tab-icon-outline { display: block; }
+.tab-icon-filled { display: none; }
+.tab-item.active .tab-icon-outline { display: none; }
+.tab-item.active .tab-icon-filled { display: block; }
 .tab-label {
   font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 9.5px;
@@ -1016,7 +1017,7 @@ html, body {
 }
 .tab-item.active .tab-label { font-weight: 700; }
 
-/* Iconly Pro : un seul SVG, le stroke-width passe de 1.5 (Light) à 2.5 (Bold) */
+/* Outline (inactif) / Filled (actif) toggle */
 
 /* ††† INSPIRATIONS — featured + masonry ††† */
 .inspo-filter {
