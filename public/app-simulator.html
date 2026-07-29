@@ -971,8 +971,8 @@ html, body {
 
 /* ═══ TAB BAR — Iconly Pro monochrome ═══ */
 /* 5 onglets : Accueil, Inspirations, Marché, Projets, Compte */
-/* Inactif : outline fine 1.4px + text-3 */
-/* Actif   : outline bold 2.2px + ink */
+/* Inactif : Light (stroke 1.5px, text-3) */
+/* Actif   : Bold  (stroke 2.5px, ink) */
 .tab-bar {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -1001,12 +1001,12 @@ html, body {
 .tab-item.active { color: var(--ink); }
 .tab-icon {
   width: 24px; height: 24px;
-  stroke-width: 1.4;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
 }
-.tab-item.active .tab-icon { stroke-width: 2.2; }
+.tab-item.active .tab-icon { stroke-width: 2.5; }
 .tab-label {
   font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 9.5px;
@@ -1016,10 +1016,7 @@ html, body {
 }
 .tab-item.active .tab-label { font-weight: 700; }
 
-/* Outline visible par défaut, solid visible quand active */
-.tab-item .tab-icon-solid { display: none; }
-.tab-item.active .tab-icon-outline { display: none; }
-.tab-item.active .tab-icon-solid { display: block; }
+/* Iconly Pro : un seul SVG, le stroke-width passe de 1.5 (Light) à 2.5 (Bold) */
 
 /* ††† INSPIRATIONS — featured + masonry ††† */
 .inspo-filter {
@@ -3888,37 +3885,32 @@ html, body {
     </div>
   </div>
 
-  <!-- TAB BAR — 5 onglets · Iconly Pro outline + solid -->
-  <!-- Accueil, Inspirations, Marché, Projets, Compte -->
+    <!-- TAB BAR -- 5 onglets · Iconly Pro Light/Bold monochrome -->
+  <!-- Stroke 1.5px inactif (text-3) → 2.5px actif (ink) -->
   <div class="tab-bar" id="tabBar">
     <!-- Accueil -->
     <div class="tab-item active" data-screen="home" onclick="navigateTo('home')">
-      <svg class="tab-icon tab-icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.07 9.83l7.72-6.07a2.4 2.4 0 012.92 0l7.72 6.07a1.8 1.8 0 01.57 1.31V20a1.5 1.5 0 01-1.5 1.5h-4v-5.25a2.75 2.75 0 00-5.5 0V21.5h-4A1.5 1.5 0 012.5 20v-8.86a1.8 1.8 0 01.57-1.31z"/></svg>
-      <svg class="tab-icon tab-icon-solid" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M13.21 3.76a2.4 2.4 0 00-2.92 0L3.07 9.83A1.8 1.8 0 002.5 11.14V20c0 .83.67 1.5 1.5 1.5h3.25v-5.25a5 5 0 019.5 0V21.5H20c.83 0 1.5-.67 1.5-1.5v-8.86a1.8 1.8 0 00-.57-1.31l-7.72-6.07zM9.75 16.25a2.25 2.25 0 014.5 0V21.5h-4.5v-5.25z"/></svg>
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1.5 1.5 0 01-1.5 1.5h-4.5v-5.5a3 3 0 00-6 0v5.5H4.5A1.5 1.5 0 013 20v-9.5z"/></svg>
       <span class="tab-label">Accueil</span>
     </div>
     <!-- Inspirations -->
     <div class="tab-item" data-screen="inspirations" onclick="navigateTo('inspirations')">
-      <svg class="tab-icon tab-icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 00-4.2 12.6c.86.68 1.42 1.62 1.52 2.9h5.36c.1-1.28.66-2.22 1.52-2.9A7 7 0 0012 2z"/><path d="M8.5 19h7"/><path d="M10 22h4"/></svg>
-      <svg class="tab-icon tab-icon-solid" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2a7 7 0 00-4.2 12.6c.86.68 1.42 1.62 1.52 2.9h5.36c.1-1.28.66-2.22 1.52-2.9A7 7 0 0012 2zM8 17.5h8v.5H8v-.5zm1.5 3h5v.5h-5v-.5zM12 3.5a5.5 5.5 0 015.16 3.63A5.48 5.48 0 0117.5 10a5.48 5.48 0 01-2.02 4.25c-.28.24-.52.52-.72.88a4.4 4.4 0 01-.58 1.12H10.32a4.4 4.4 0 01-.58-1.12c-.2-.36-.44-.64-.72-.88A5.48 5.48 0 016.5 10a5.48 5.48 0 01.84-2.87A5.5 5.5 0 0112 3.5z"/></svg>
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 00-4.2 12.6c.86.68 1.42 1.62 1.52 2.9h5.36c.1-1.28.66-2.22 1.52-2.9A7 7 0 0012 2z"/><path d="M8.5 19h7"/><path d="M10 22h4"/></svg>
       <span class="tab-label">Inspirations</span>
     </div>
     <!-- Marché -->
     <div class="tab-item" data-screen="marketplace" onclick="navigateTo('marketplace')">
-      <svg class="tab-icon tab-icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 7.5V5.5a4.5 4.5 0 019 0v2"/><path d="M4.55 7.5h14.9a1 1 0 01.99 1.14l-1.24 11.2a2 2 0 01-1.99 1.66H7.79a2 2 0 01-1.99-1.66L4.56 8.64A1 1 0 014.55 7.5z"/></svg>
-      <svg class="tab-icon tab-icon-solid" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.5 5.5 0 00-5.5 5.5V8.5H4.55a2 2 0 00-1.98 2.28l1.24 11.2a3 3 0 002.98 2.52h10.42a3 3 0 002.98-2.52l1.24-11.2A2 2 0 0020.45 7H18V5.5a5.5 5.5 0 00-6-5zm1.42 1.06A4 4 0 0116 5.5V7H8V5.5a4 4 0 014-4c.48 0 .94.08 1.42.22zM5.02 8.5h13.96l-1.17 10.58a1.5 1.5 0 01-1.49 1.32H8.68a1.5 1.5 0 01-1.49-1.32L5.02 8.5z"/></svg>
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 7.5V5.5a4.5 4.5 0 019 0v2"/><path d="M4.5 7.5h15a1 1 0 01.99 1.14l-1.24 11.2a2 2 0 01-1.99 1.66H7.79a2 2 0 01-1.99-1.66L4.56 8.64A1 1 0 014.5 7.5z"/></svg>
       <span class="tab-label">Marché</span>
     </div>
     <!-- Projets -->
     <div class="tab-item" data-screen="projets" onclick="navigateTo('projets')">
-      <svg class="tab-icon tab-icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5.25" y="4.25" width="13.5" height="17.5" rx="2"/><path d="M9.5 3.5h5a1.5 1.5 0 011.5 1.5v.25h-8V5A1.5 1.5 0 019.5 3.5z"/><path d="M9.5 12.5h5"/><path d="M9.5 16h3.5"/></svg>
-      <svg class="tab-icon tab-icon-solid" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.5 3a2.5 2.5 0 00-2.5 2.5V5.75h-1.75a2.25 2.25 0 00-2.23 2.5l1.14 12.2a2.75 2.75 0 002.73 2.55h10.72a2.75 2.75 0 002.73-2.55l1.14-12.2a2.25 2.25 0 00-2.23-2.5H17V5.5A2.5 2.5 0 0014.5 3h-5zM8 5.75V5.5a1.5 1.5 0 011.5-1.5h5A1.5 1.5 0 0116 5.5v.25H8zM7.25 7.25h9.5l-1.08 11.55a1.25 1.25 0 01-1.24 1.15H9.57a1.25 1.25 0 01-1.24-1.15L7.25 7.25zM9.5 12h5v1.5h-5V12zm0 3.5h3.5v1.5H9.5v-1.5z"/></svg>
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9.5 3h5a1 1 0 011 1v.5h-7V4a1 1 0 011-1z"/><path d="M9 12h6"/><path d="M9 15.5h4"/></svg>
       <span class="tab-label">Projets</span>
     </div>
     <!-- Compte -->
     <div class="tab-item" data-screen="compte" onclick="navigateTo('compte')">
-      <svg class="tab-icon tab-icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4.25"/><path d="M4.5 21.5c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5"/></svg>
-      <svg class="tab-icon tab-icon-solid" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.75a5.25 5.25 0 100 10.5 5.25 5.25 0 000-10.5zM7.75 8.25a4.25 4.25 0 118.5 0 4.25 4.25 0 01-8.5 0zM12 14.75c-4.42 0-8 2.91-8 6.5v.75h16v-.75c0-3.59-3.58-6.5-8-6.5zM5.52 21c.48-2.83 3.23-5 6.48-5s6 2.17 6.48 5H5.52z"/></svg>
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5"/></svg>
       <span class="tab-label">Compte</span>
     </div>
   </div>
