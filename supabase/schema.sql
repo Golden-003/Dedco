@@ -274,6 +274,48 @@ CREATE TABLE public.products (
 CREATE TRIGGER trg_products_updated_at BEFORE UPDATE ON public.products
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
+-- Réserve le stock d'un panier multi-articles en une seule transaction
+-- atomique (un aller-retour réseau, tout-ou-rien) : si UN article manque de
+-- stock, l'exception annule tous les décréments déjà faits dans cette même
+-- fonction — pas besoin de compensation manuelle côté Edge Function.
+-- items: [{ "productId": "uuid", "qty": 2 }, ...]
+CREATE OR REPLACE FUNCTION public.reserve_stock(items JSONB)
+RETURNS void AS $$
+DECLARE
+  item jsonb;
+  p_id uuid;
+  p_qty integer;
+  p_name text;
+  updated_rows integer;
+BEGIN
+  FOR item IN SELECT * FROM jsonb_array_elements(items) LOOP
+    p_id := (item->>'productId')::uuid;
+    p_qty := (item->>'qty')::integer;
+    UPDATE public.products SET stock = stock - p_qty WHERE id = p_id AND stock >= p_qty;
+    GET DIAGNOSTICS updated_rows = ROW_COUNT;
+    IF updated_rows = 0 THEN
+      SELECT name INTO p_name FROM public.products WHERE id = p_id;
+      RAISE EXCEPTION 'INSUFFICIENT_STOCK:%', COALESCE(p_name, p_id::text);
+    END IF;
+  END LOOP;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Restitue un panier réservé par reserve_stock (ex: échec après réservation
+-- — adresse invalide, paiement non initié). Sans garde-fou : on redonne
+-- exactement ce qui a été pris.
+CREATE OR REPLACE FUNCTION public.release_stock(items JSONB)
+RETURNS void AS $$
+DECLARE
+  item jsonb;
+BEGIN
+  FOR item IN SELECT * FROM jsonb_array_elements(items) LOOP
+    UPDATE public.products SET stock = stock + (item->>'qty')::integer
+    WHERE id = (item->>'productId')::uuid;
+  END LOOP;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 CREATE TABLE public.product_images (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   product_id  UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
@@ -644,6 +686,7 @@ CREATE TABLE public.brief_designer_history (
   to_status   brief_designer_status,
   actor_id    UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
   actor_role  TEXT,
+  metadata    JSONB,      -- porte le devis (prix, scope, livrables…) entre ACCEPTED et la création du design_project
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -797,6 +840,54 @@ CREATE TABLE public.wallets (
 );
 CREATE TRIGGER trg_wallets_updated_at BEFORE UPDATE ON public.wallets
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+
+-- Ajustement atomique du solde, avec garde-fou plancher à 0 dans le WHERE :
+-- deux débits concurrents (ex: deux demandes de retrait) ne peuvent jamais
+-- mettre le solde en négatif — le second appel retourne false au lieu
+-- d'écraser silencieusement le résultat du premier. p_delta positif =
+-- crédit, négatif = débit. Utilisée pour les mouvements "immédiats"
+-- (retrait, remboursement) ; voir release_wallet_transaction ci-dessous
+-- pour le cas "libération d'un crédit en attente".
+CREATE OR REPLACE FUNCTION public.adjust_wallet_balance(p_wallet_id UUID, p_delta INTEGER)
+RETURNS boolean AS $$
+DECLARE
+  updated_rows integer;
+BEGIN
+  UPDATE public.wallets SET balance = balance + p_delta
+  WHERE id = p_wallet_id AND balance + p_delta >= 0;
+  GET DIAGNOSTICS updated_rows = ROW_COUNT;
+  RETURN updated_rows > 0;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Libère une transaction wallet "pending" (crédit ou débit) : bascule son
+-- statut à "completed" ET applique le delta sur le solde dans LA MÊME
+-- transaction Postgres — les deux écritures ne peuvent jamais diverger,
+-- contrairement à deux appels séparés depuis l'Edge Function. Retourne
+-- false si la transaction n'existe pas ou n'est plus "pending" (idempotent :
+-- rejouer l'appel après un succès ne double-crédite pas).
+CREATE OR REPLACE FUNCTION public.release_wallet_transaction(p_txn_id UUID)
+RETURNS boolean AS $$
+DECLARE
+  txn RECORD;
+BEGIN
+  SELECT * INTO txn FROM public.wallet_transactions
+  WHERE id = p_txn_id AND status = 'pending' FOR UPDATE;
+  IF NOT FOUND THEN
+    RETURN false;
+  END IF;
+
+  UPDATE public.wallet_transactions SET status = 'completed' WHERE id = p_txn_id;
+
+  IF txn.type = 'credit' THEN
+    UPDATE public.wallets SET balance = balance + txn.amount WHERE id = txn.wallet_id;
+  ELSE
+    UPDATE public.wallets SET balance = balance - txn.amount WHERE id = txn.wallet_id;
+  END IF;
+
+  RETURN true;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 CREATE TABLE public.wallet_transactions (
   id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
