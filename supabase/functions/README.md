@@ -61,9 +61,17 @@ supabase secrets set \
 ## 3. Développement local
 
 ```bash
-supabase start                 # lance Postgres + Auth + Storage en local
-supabase functions serve       # sert toutes les fonctions sur http://localhost:54321/functions/v1/<nom>
+supabase start                                    # lance Postgres + Auth + Storage en local
+supabase functions serve --no-verify-jwt          # sert toutes les fonctions sur http://localhost:54321/functions/v1/<nom>
 ```
+
+`--no-verify-jwt` est nécessaire ici : `functions serve` sert TOUTES les
+fonctions avec un seul réglage de vérification JWT (pas de flag par
+fonction comme au déploiement). Sans lui, la passerelle locale rejette en
+401 les appels à `fedapay-webhook`/`send-push` avant même d'exécuter leur
+code, puisqu'ils n'envoient jamais de JWT Supabase. Chaque fonction fait de
+toute façon sa propre vérification (`requireUser`/`requireAdmin`), donc
+aucune protection réelle n'est perdue en local.
 
 Tester une fonction protégée par JWT :
 
